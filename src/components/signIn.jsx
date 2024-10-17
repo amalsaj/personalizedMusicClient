@@ -8,7 +8,7 @@ const SignInPage = () => {
     setLoading(true);
     setError("");
     try {
-      window.location.href = "http://localhost:8000/login";
+      window.location.href = "https://personalizedmusicserver.onrender.com/login";
     } catch (error) {
       console.error("Error during login redirect:", error);
       setError("Failed to redirect to login.");

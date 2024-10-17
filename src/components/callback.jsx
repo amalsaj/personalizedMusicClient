@@ -16,7 +16,7 @@ const Callback = () => {
       if (code && state) {
         try {
           const response = await axios.get(
-            `http://localhost:8000/callback?code=${code}&state=${state}`
+            `https://personalizedmusicserver.onrender.com/callback?code=${code}&state=${state}`
           );
           localStorage.setItem("token", response.data.access_token);
           localStorage.setItem("refresh_token", response.data.refresh_token);

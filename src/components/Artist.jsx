@@ -28,7 +28,7 @@ const Artist = () => {
   }, []);
 
   return (
-    <div className="relative p-6 rounded-lg mb-6 overflow-hidden shadow-lg bg-gradient-to-br from-[#1c1c3c] to-[#0f0f24]">
+    <div className="relative p-4 rounded-lg mb-6 overflow-hidden shadow-lg bg-gradient-to-br from-[#1c1c3c] to-[#0f0f24]">
       {/* Background Image */}
       {image && (
         <div
@@ -46,14 +46,14 @@ const Artist = () => {
           <img
             src={image}
             alt={artistName}
-            className="w-24 h-24 rounded-full border-4 border-[#1ed760] shadow-lg"
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-[#1ed760] shadow-lg"
           />
         )}
 
-        <div className="ml-4">
+        <div className="ml-3 sm:ml-4">
           {/* Verified Artist Badge */}
           <div className="flex items-center mb-1">
-            <span className="text-blue-400 text-sm">Verified Artist</span>
+            <span className="text-blue-400 text-xs sm:text-sm">Verified Artist</span>
             <svg
               className="w-4 h-4 text-blue-400 ml-1"
               fill="currentColor"
@@ -64,12 +64,12 @@ const Artist = () => {
           </div>
 
           {/* Artist Name */}
-          <h3 className="text-3xl font-bold text-white">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white">
             {artistName || "Unknown Artist"}
           </h3>
 
           {/* Followers Count */}
-          <p className="text-gray-300">
+          <p className="text-gray-300 text-sm sm:text-base">
             {followers.toLocaleString()} monthly listeners
           </p>
         </div>

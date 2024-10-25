@@ -11,10 +11,9 @@ import {
   FaRegHeart,
   FaClock,
   FaArrowLeft,
-} from "react-icons/fa"; // Importing FaArrowLeft icon
+} from "react-icons/fa";
 
 const Songs = ({ setTrackUri, trackUri, setValue, apiType }) => {
-  // Receive setValue as a prop
   const [songs, setSongs] = useState([]);
   const [likedSongs, setLikedSongs] = useState(new Set());
   const [image, setImage] = useState("");
@@ -40,16 +39,12 @@ const Songs = ({ setTrackUri, trackUri, setValue, apiType }) => {
         }));
         setSongs(extractedPlaylist);
 
-        // Set additional values for artist
         artist = newSongs.data.artists[0].name;
         totalTracks = newSongs.data.tracks.length;
         duration = formatDuration(
-          newSongs.data.tracks.reduce(
-            (acc, track) => acc + track.duration_ms,
-            0
-          )
+          newSongs.data.tracks.reduce((acc, track) => acc + track.duration_ms, 0)
         );
-        image = newSongs.data.tracks[0].album.images[0].url; // Assuming you want the image of the first track
+        image = newSongs.data.tracks[0].album.images[0].url;
       } else if (apiType === "album") {
         newSongs = await getTracksAlbum(`${id}`, token);
         const extractedPlaylist = newSongs.data.items.map((track) => ({
@@ -65,7 +60,7 @@ const Songs = ({ setTrackUri, trackUri, setValue, apiType }) => {
         duration = formatDuration(
           newSongs.data.items.reduce((acc, track) => acc + track.duration_ms, 0)
         );
-        image = newSongs.data.items[0].track.album.images[0].url; // Assuming the album cover image is available
+        image = newSongs.data.items[0].track.album.images[0].url;
       } else if (apiType === "playlist") {
         newSongs = await getTracksPlaylist(`${id}`, token);
         const extractedPlaylist = newSongs.data.items.map((item) => ({
@@ -84,7 +79,6 @@ const Songs = ({ setTrackUri, trackUri, setValue, apiType }) => {
         throw new Error("Invalid API type");
       }
 
-      // Update the state with the values
       setImage(image);
       setArtist(artist);
       setTotalTracks(totalTracks);
@@ -110,7 +104,6 @@ const Songs = ({ setTrackUri, trackUri, setValue, apiType }) => {
     });
   };
 
-  // Back button click handler
   const handleBackClick = () => {
     setValue(false);
   };
@@ -124,70 +117,57 @@ const Songs = ({ setTrackUri, trackUri, setValue, apiType }) => {
         <FaArrowLeft className="mr-2" />
       </button>
 
-        <div className="flex items-center mb-6">
-          <img
-            src={image}
-            alt="Album Cover"
-            className="w-40 h-40 object-cover rounded-md shadow-lg"
-          />
-          <div className="ml-6">
-            <h1 className="text-3xl font-bold text-white">Album</h1>
-            <p className="text-md text-gray-300 mt-1">{artist}</p>
-            <p className="text-md text-gray-300 mt-1">
-              {totalTracks} Songs
-            </p>
-          </div>
+      <div className="flex items-center mb-4 md:mb-6">
+        <img
+          src={image}
+          alt="Album Cover"
+          className="w-24 h-24 md:w-40 md:h-40 object-cover rounded-md shadow-lg"
+        />
+        <div className="ml-4 md:ml-6">
+          <h1 className="text-xl md:text-3xl font-bold">Album</h1>
+          <p className="text-sm md:text-md text-gray-300 mt-1">{artist}</p>
+          <p className="text-sm md:text-md text-gray-300 mt-1">{totalTracks} Songs</p>
         </div>
-      
+      </div>
+
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-700">
           <thead>
             <tr className="bg-gray-800">
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-300">
-                #
-              </th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-300">
-                Image
-              </th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-300">
-                Song
-              </th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-300">
-                <FaClock className="inline-block" /> {/* Duration icon */}
+              <th className="px-2 py-2 text-left text-xs md:text-sm font-medium text-gray-300">#</th>
+              <th className="px-2 py-2 text-left text-xs md:text-sm font-medium text-gray-300">Image</th>
+              <th className="px-2 py-2 text-left text-xs md:text-sm font-medium text-gray-300">Song</th>
+              <th className="px-2 py-2 text-left text-xs md:text-sm font-medium text-gray-300">
+                <FaClock className="inline-block" />
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-700">
             {songs.map((song, index) => (
-              <tr
-                key={index}
-                className="hover:bg-gray-800 transition duration-300 relative"
-              >
-                <td className="px-4 py-4 text-sm text-gray-400">{index + 1}</td>
-                <td className="px-4 py-4">
+              <tr key={index} className="hover:bg-gray-800 transition duration-300 relative">
+                <td className="px-2 py-2 text-xs md:text-sm text-gray-400">{index + 1}</td>
+                <td className="px-2 py-2">
                   <img
                     src={song.image}
                     alt={song.songName}
-                    className="w-12 h-12 object-cover rounded-md"
+                    className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-md"
                   />
                 </td>
-                <td className="px-4 py-4">
+                <td className="px-2 py-2">
                   <div className="flex flex-col">
                     <span
-                      className="font-semibold cursor-pointer text-lg hover:text-red-500 transition duration-300"
+                      className="font-semibold cursor-pointer text-sm md:text-lg hover:text-red-500 transition duration-300"
                       onClick={() => setTrackUri(song.trackUri)}
                     >
                       {song.songName}
                     </span>
-                    <span className="text-sm text-gray-400">
-                      {song.artistName}
-                    </span>
+                    <span className="text-xs md:text-sm text-gray-400">{song.artistName}</span>
                   </div>
                 </td>
-                <td className="px-4 py-4 flex items-center">
-                  <span className="text-gray-400">{song.duration}</span>
+                <td className="px-2 py-2 flex items-center">
+                  <span className="text-xs md:text-sm text-gray-400">{song.duration}</span>
                   <button
-                    className={`text-gray-400 hover:text-red-500 transition duration-300 ml-4 ${
+                    className={`text-gray-400 hover:text-red-500 transition duration-300 ml-2 ${
                       likedSongs.has(song.trackUri) ? "text-red-500" : ""
                     }`}
                     onClick={() => toggleLike(song.trackUri)}
@@ -198,7 +178,7 @@ const Songs = ({ setTrackUri, trackUri, setValue, apiType }) => {
                       <FaRegHeart />
                     )}
                   </button>
-                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition duration-300">
+                  <div className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition duration-300">
                     <FaPlay className="text-gray-400 hover:text-red-500" />
                   </div>
                 </td>

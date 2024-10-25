@@ -52,29 +52,30 @@ const ArtistBest = ({ searchTerm, id, setTrackUri, setValue, setApiType }) => {
         {artistPopular.map((value, index) => (
           <div
             key={index}
-            className="bg-[#2b1a35] bg-opacity-50 backdrop-blur-lg border border-[#ffffff1a] p-4 rounded-xl min-w-[180px] max-w-[180px] h-[260px] flex-shrink-0 shadow-lg"
+            className="bg-[#2b1a35] bg-opacity-50 backdrop-blur-lg border border-[#ffffff1a] p-4 rounded-xl min-w-[160px] max-w-[160px] h-[240px] flex-shrink-0 shadow-lg
+            sm:min-w-[180px] sm:max-w-[180px] sm:h-[260px]" // Compact on small screens
           >
             <img
               src={value.image}
               alt={value.name}
-              className="w-full h-[120px] object-cover rounded-lg mb-3 shadow-md"
+              className="w-full h-[100px] sm:h-[120px] object-cover rounded-lg mb-2 shadow-md" // Reduced height on small screens
               onClick={() => handlePlaylist(value.id)}
             />
-            <h4 className="text-white font-semibold text-base mb-1 truncate max-w-sm">
+            <h4 className="text-white font-semibold text-sm sm:text-base mb-1 truncate max-w-sm">
               {value.name}
             </h4>
-            <p className="text-gray-400 text-sm mb-3">
+            <p className="text-gray-400 text-xs sm:text-sm mb-2">
               {value.artists[0]?.name || "Various Artists"}
             </p>
-            <div className="flex items-center space-x-3">
-              <button className="text-white hover:text-red-400 transition-colors duration-200 text-xl">
-                <CiHeart className="text-xl" />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <button className="text-white hover:text-red-400 transition-colors duration-200 text-lg sm:text-xl">
+                <CiHeart />
               </button>
-              <button className="text-white hover:text-gray-300 transition-colors duration-200 text-xl">
-                <MdOutlineFileDownload className="text-xl" />
+              <button className="text-white hover:text-gray-300 transition-colors duration-200 text-lg sm:text-xl">
+                <MdOutlineFileDownload />
               </button>
-              <button className="text-white hover:text-gray-300 transition-colors duration-200 text-xl">
-                <BsThreeDotsVertical className="text-xl" />
+              <button className="text-white hover:text-gray-300 transition-colors duration-200 text-lg sm:text-xl">
+                <BsThreeDotsVertical />
               </button>
             </div>
           </div>

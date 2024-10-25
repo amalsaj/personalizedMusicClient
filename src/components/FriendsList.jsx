@@ -46,8 +46,7 @@ const FollowListByUser = () => {
   const displayedUsers = showAll ? followUser : followUser.slice(0, 4);
 
   return (
-    <div className="flex justify-center items-start min-h-screen pt-10">
-      {/* Compact div card with improved alignment and margin/padding */}
+   <div className="hidden md:flex justify-center items-start min-h-screen pt-10">
       <div className="max-w-xs w-72 p-4 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg border border-white/20 m-6">
         <h3 className="text-lg font-semibold text-white mb-3">Follow</h3>
         <hr className="bg-white/30 mb-3" />

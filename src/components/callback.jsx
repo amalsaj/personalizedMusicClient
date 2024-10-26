@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import queryString from "query-string";
+import { UrlDev,Urlpro } from "../utils/utils";
 import SkeletonLoader from "./loader"; // Ensure the path is correct
 
 const Callback = () => {
@@ -16,7 +17,7 @@ const Callback = () => {
       if (code && state) {
         try {
           const response = await axios.get(
-            `https://personalizedmusicserver.onrender.com/callback?code=${code}&state=${state}`
+            `${Urlpro}/callback?code=${code}&state=${state}`
           );
           localStorage.setItem("token", response.data.access_token);
           localStorage.setItem("refresh_token", response.data.refresh_token);

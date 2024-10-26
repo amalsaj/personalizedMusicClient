@@ -8,10 +8,14 @@ import Player from "../components/Player";
 import Navbar from "./Header";
 import Songs from "./Songs";
 import BottomNav from "./BottomNav"; // Import the BottomNav component
+import User from "./User";
+import Search from './Search';
 
 const Profile = ({ setTrackUri, trackUri }) => {
   const [value, setValue] = useState(false);
   const [apiType, setApiType] = useState("");
+  const [search, setSearch] = useState(false);
+  console.log('search: ', search);
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-[#38304d] to-[#2d223b]">
@@ -22,8 +26,11 @@ const Profile = ({ setTrackUri, trackUri }) => {
         </div>
         <div className="flex-grow p-6 overflow-y-auto">
           {!value && <Navbar />}
-          {!value && <Artist />}
-          {!value ? (
+          <div className="md:hidden">{!value && !search && <User setSearch={setSearch} />}</div>
+          <div className="hidden md:block">{!value && <Artist />}</div>
+
+          {/* Check if value is false and search is false */}
+          {!value && !search ? (
             <>
               <PopularAlbums setValue={setValue} setApiType={setApiType} />
               <ArtistBest
@@ -38,24 +45,28 @@ const Profile = ({ setTrackUri, trackUri }) => {
               />
             </>
           ) : (
-            <Songs
-              setTrackUri={setTrackUri}
-              trackUri={trackUri}
-              setValue={setValue}
-              apiType={apiType}
-            />
+            // If search is true, show the Search component
+            search ? (
+              <Search />
+            ) : (
+              <Songs
+                setTrackUri={setTrackUri}
+                trackUri={trackUri}
+                setValue={setValue}
+                apiType={apiType}
+              />
+            )
           )}
         </div>
         {/* FriendsList only visible on medium screens and larger */}
-        {!value && (
-           <FriendsList className="w-[300px] border-l border-gray-700" />
-        )}
+        {!value && <FriendsList className="w-[300px] border-l border-gray-700" />}
       </div>
       {/* Player - Fixed at bottom on all screen sizes */}
       <Player
-        className="fixed bottom-0 left-0 w-full border-t border-gray-700"
+        className="fixed bottom-5 left-0 w-full border-t border-gray-700 sm:bottom-0"
         trackUri={trackUri}
       />
+
       {/* Bottom Navigation (only visible on mobile screens) */}
       <div className="md:hidden">
         <BottomNav />

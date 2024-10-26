@@ -48,3 +48,8 @@ export const getTracksArtist = (id, token) =>
   axios.get(`https://api.spotify.com/v1/artists/${id}/top-tracks`, {
     headers: createHeaders(token),
   });
+
+  export const search = (query,type,token) =>
+    axios.get(`https://api.spotify.com/v1/search?q=${query}&type=${type}`, {
+      headers: createHeaders(token),
+    });

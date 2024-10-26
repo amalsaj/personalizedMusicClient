@@ -10,9 +10,9 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex w-full justify-between items-center py-4 px-8 bg-transparent hidden md:block">
+    <div className="hidden md:flex flex-col md:flex-row w-full justify-between items-center py-4 px-4 md:px-8 bg-transparent">
       {/* Left section: Navigation links */}
-      <div className="flex space-x-8 text-gray-400">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-gray-400 mb-4 md:mb-0">
         <a href="/discover" className="text-white hover:text-white transition">
           Discover
         </a>

@@ -22,17 +22,18 @@ const Profile = ({ setTrackUri, trackUri }) => {
       <div className="flex flex-grow overflow-hidden">
         {/* Sidebar for larger screens */}
         <div className="hidden md:flex">
-          <Sidebar />
+          
+          < Sidebar />
         </div>
         <div className="flex-grow p-6 overflow-y-auto">
-          {!value && <Navbar />}
+        {!value && !search && <Navbar setSearch={setSearch} />}
           <div className="md:hidden">{!value && !search && <User setSearch={setSearch} />}</div>
-          <div className="hidden md:block">{!value && <Artist />}</div>
+          <div className="hidden md:block">{!value && !search && <Artist />}</div>
 
           {/* Check if value is false and search is false */}
           {!value && !search ? (
             <>
-              <PopularAlbums setValue={setValue} setApiType={setApiType} />
+              <PopularAlbums setValue={setValue} setApiType={setApiType}/>
               <ArtistBest
                 id={"1qFp8zDvsXyCsC5dqz8X4S"}
                 setValue={setValue}
@@ -47,7 +48,7 @@ const Profile = ({ setTrackUri, trackUri }) => {
           ) : (
             // If search is true, show the Search component
             search ? (
-              <Search />
+              <Search setSearch={setSearch} setTrackUri={setTrackUri}/>
             ) : (
               <Songs
                 setTrackUri={setTrackUri}

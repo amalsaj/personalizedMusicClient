@@ -11,9 +11,9 @@ const BottomNav = () => {
 
   const navItems = [
     { name: "Home", icon: <AiFillHome size={24} />, path: "/profile" },
-    { name: "Browse", icon: <IoMdAlbums size={24} />, path: "/browse" },
+    // { name: "Browse", icon: <IoMdAlbums size={24} />, path: "/browse" },
     { name: "Search", icon: <BiSearch size={24} />, path: "/search" },
-    { name: "Radio", icon: <FaBroadcastTower size={24} />, path: "/radio" },
+    // { name: "Radio", icon: <FaBroadcastTower size={24} />, path: "/radio" },
     { name: "Your Library", icon: <MdLibraryMusic size={24} />, path: "/library" },
   ];
 

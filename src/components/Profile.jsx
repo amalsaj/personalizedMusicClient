@@ -10,6 +10,8 @@ import Songs from "./Songs";
 import BottomNav from "./BottomNav"; // Import the BottomNav component
 import User from "./User";
 import Search from './Search';
+import PopularList from "./List";
+import End from "./End";
 
 const Profile = ({ setTrackUri, trackUri }) => {
   const [value, setValue] = useState(false);
@@ -44,6 +46,8 @@ const Profile = ({ setTrackUri, trackUri }) => {
                 setValue={setValue}
                 setApiType={setApiType}
               />
+              <PopularList setTrackUri={setTrackUri}/>
+              <End/>
             </>
           ) : (
             // If search is true, show the Search component
@@ -70,7 +74,7 @@ const Profile = ({ setTrackUri, trackUri }) => {
 
       {/* Bottom Navigation (only visible on mobile screens) */}
       <div className="md:hidden">
-        <BottomNav />
+        <BottomNav  setSearch={setSearch}/>
       </div>
     </div>
   );

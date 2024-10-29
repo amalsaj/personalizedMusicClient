@@ -1,67 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FiLogOut, FiUser } from 'react-icons/fi';
 
-const User = ({ setSearch }) => {
+const User = ({ userName = "John Johnson", setSearch }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [greeting, setGreeting] = useState("");
+
+  useEffect(() => {
+    const hours = new Date().getHours();
+    if (hours < 12) {
+      setGreeting("Good Morning");
+    } else if (hours < 18) {
+      setGreeting("Good Afternoon");
+    } else {
+      setGreeting("Good Evening");
+    }
+  }, []);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleClick = () => {
-    
-    console.log('setSearch');
-    setSearch(true);
-  };
-
-
-
-
   return (
-    <div className="relative bg-gray-800 text-white p-6 rounded-lg shadow-lg max-w-xl mx-auto">
-      {/* Profile Image Positioned Top-Right */}
-      <div className="absolute top-4 right-4">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-7NSYeC_eZM9ZoAtWhrGB1mv4ePMLPfSJ4w&s"
-          alt="Profile"
-          className="rounded-full w-12 h-12 md:w-16 md:h-16 border-2 border-blue-600 shadow-lg cursor-pointer"
-          onClick={toggleDropdown}
-        />
-        {isDropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-violet-900 text-white rounded-lg shadow-lg py-2 z-10">
-            <a
-              href="#account"
-              className="block px-4 py-2 text-sm hover:bg-violet-700 transition-colors duration-150"
-            >
-              Account
-            </a>
-            <a
-              href="/"
-              className="block px-4 py-2 text-sm hover:bg-violet-700 transition-colors duration-150"
-            >
-              Logout
-            </a>
-          </div>
-        )}
-      </div>
+    <div className="relative bg-gradient-to-r from-gray-900 to-black text-gray-100 p-6 rounded-b-lg shadow-md max-w-full mx-auto">
+      {/* App Header */}
+      <div className="flex items-center justify-between">
+        {/* Greeting Section */}
+        <div>
+          <h1 className="text-xl font-semibold">{greeting},</h1>
+          <h2 className="text-lg font-light text-gray-300">{userName}!</h2>
+        </div>
 
-      {/* Main Content */}
-      <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0">
-        <div className="flex-grow">
-          <h1 className="text-2xl md:text-3xl font-semibold mb-2">Hello, John Johnson</h1>
-          <h2 className="text-base md:text-lg font-normal text-gray-300 mb-4">Welcome back!</h2>
-          <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Search albums, songs..."
-              className="w-full p-3 md:p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-              onFocus={handleClick}
-            />
-          </div>
-          {/* <p className="text-sm text-gray-400">
-            Find your favorite albums and songs easily.
-          </p> */}
+        {/* Profile Image & Dropdown */}
+        <div className="relative">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-7NSYeC_eZM9ZoAtWhrGB1mv4ePMLPfSJ4w&s"
+            alt="Profile"
+            className="rounded-full w-12 h-12 border-2 border-gray-600 shadow-lg cursor-pointer transform transition-transform duration-150 hover:scale-105"
+            onClick={toggleDropdown}
+          />
+          {isDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-gray-800 text-gray-200 rounded-lg shadow-lg py-2 z-20">
+              <a
+                href="#account"
+                className="flex items-center px-4 py-2 text-sm font-medium hover:bg-gray-700 transition-colors duration-150"
+              >
+                <FiUser className="mr-2" /> Account
+              </a>
+              <a
+                href="/"
+                className="flex items-center px-4 py-2 text-sm font-medium hover:bg-gray-700 transition-colors duration-150"
+              >
+                <FiLogOut className="mr-2" /> Logout
+              </a>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Subtitle */}
+      <p className="text-gray-400 mt-4 text-sm">Welcome back! Let’s get started with your tasks for today.</p>
     </div>
   );
 };

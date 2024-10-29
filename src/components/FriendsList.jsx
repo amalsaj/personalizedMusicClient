@@ -46,28 +46,28 @@ const FollowListByUser = () => {
   const displayedUsers = showAll ? followUser : followUser.slice(0, 4);
 
   return (
-   <div className="hidden md:flex justify-center items-start min-h-screen pt-10">
-      <div className="max-w-xs w-72 p-4 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg border border-white/20 m-6">
-        <h3 className="text-lg font-semibold text-white mb-3">Follow</h3>
-        <hr className="bg-white/30 mb-3" />
-        {error && <p className="text-red-500 mb-3">{error}</p>}
-        <div className="space-y-3">
+    <div className="hidden md:flex justify-center items-start min-h-screen pt-6">
+      <div className="max-w-xs w-56 p-2 bg-white/10 backdrop-blur-lg rounded-lg shadow-md border border-white/20 m-2">
+        <h3 className="text-lg font-semibold text-white mb-2">Follow</h3>
+        <hr className="bg-white/30 mb-2" />
+        {error && <p className="text-red-500 mb-2">{error}</p>}
+        <div className="space-y-1">
           {displayedUsers.map((user) => (
             <div
               key={user.id}
-              className="flex items-center justify-between bg-transparent p-2 rounded-md"
+              className="flex items-center justify-between bg-transparent p-1 rounded-md"
             >
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
                 <img
                   src={user.image}
                   alt={user.name}
-                  className="w-10 h-10 rounded-full border border-white/20"
+                  className="w-8 h-8 rounded-full border border-white/20"
                 />
-                <span className="text-white text-sm">{user.name}</span>
+                <span className="text-white text-xs">{user.name}</span>
               </div>
               <button
                 onClick={() => toggleFollow(user.id)}
-                className={`px-3 py-1 text-xs border border-white rounded-full transition-colors ${
+                className={`px-2 py-1 text-xs border border-white rounded-full transition-colors ${
                   user.isFollowing
                     ? "bg-transparent text-white"
                     : "bg-transparent text-white"
@@ -80,10 +80,10 @@ const FollowListByUser = () => {
         </div>
 
         {followUser.length > 4 && (
-          <div className="mt-4 text-center">
+          <div className="mt-2 text-center">
             <span
               onClick={toggleShowAll}
-              className="cursor-pointer text-green-400 hover:underline text-sm"
+              className="cursor-pointer text-green-400 hover:underline text-xs"
             >
               {showAll ? "Show Less" : "Show All"}
             </span>

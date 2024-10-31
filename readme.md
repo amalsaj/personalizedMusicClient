@@ -1,4 +1,4 @@
-# Project Title
+# MUSIC APPLICATION
 
 This project integrates with the Spotify Web API to provide music streaming features. Follow the steps below to set up and run the application locally.
 
